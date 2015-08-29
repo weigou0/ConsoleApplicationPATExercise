@@ -5,8 +5,7 @@ void test(void) {
 	printf("hello"); 
 	//return 0;
 }
-
-      
+//this is a test for merge
 //1004
 /*
 1004. 成绩排名(20)
