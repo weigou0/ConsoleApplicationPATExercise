@@ -30,7 +30,7 @@ Mary EE990830 95
 Mike CS991301
 Joe Math990112
 */
-void pat_basic_1004(void) 
+void pat_basic_1004(void)     
 {
 	char data[100][3];
 	int num = 0;
