@@ -43,7 +43,7 @@ int pat_basic_1004(void)
 		for (int i = 0; i < n-1; i++)
 		{
 			//if(scanf("%s", p->stu_name_c)||scanf("%s", p->stu_number_c)||scanf("%d",p->stu_score_i));
-			if (scanf("%s %s %d", &(p->stu_name_c), &(p->stu_number_c), &(p->stu_score_i)));
+			if (scanf("%s %s %d", &(p->stu_name_c), &(p->stu_number_c), &(p->stu_score_i)) == 3);
 			else
 			{
 				printf("READ ERROR!");
