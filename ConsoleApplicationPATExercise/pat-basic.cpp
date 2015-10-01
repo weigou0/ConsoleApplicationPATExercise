@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "DataStructure.h"
 
 
 void test(void) {
@@ -29,40 +30,101 @@ Mary EE990830 95
 Mike CS991301
 Joe Math990112
 */
-void pat_basic_1004(void) 
+int pat_basic_1004(void) 
 {
-	char data[100][3];
-	int num = 0;
-	int maxScore = 0;
-	int maxStu = 0;
-	int minScore = 0;
-	int minStu = 0; 
+	int n = 0;
 
-	scanf("%d", &num);
-	for (int i = 0; i < num; i++)
+	//read
+	if(scanf("%d",&n) == 1)
 	{
-		for (int j = 1; j < 4; j++)
+		stu_info_1004_pt start = (stu_info_1004_pt)malloc(sizeof(stu_info_1004));
+		stu_info_1004_pt p = start;
+		//1 <--> (n-1)
+		for (int i = 0; i < n-1; i++)
 		{
-			scanf("%s", data[i][j]);
+			//if(scanf("%s", p->stu_name_c)||scanf("%s", p->stu_number_c)||scanf("%d",p->stu_score_i));
+			if (scanf("%s %s %d", &(p->stu_name_c), &(p->stu_number_c), &(p->stu_score_i)));
+			else
+			{
+				printf("READ ERROR!");
+				return -1;
+			}
+			stu_info_1004_pt temp_pt = (stu_info_1004_pt)malloc(sizeof(stu_info_1004));
+			p->next_stu_info_pt = temp_pt;
+			p = temp_pt;
 		}
-		data[i][0] = i;
-	}
-	for (int i = 0; i < num; i++)
-	{
-		if (data[i][3] > maxScore)
-			maxScore = i;
-		else;
-	}
+		//n
+		if (scanf("%s %s %d", &(p->stu_name_c), &(p->stu_number_c), &(p->stu_score_i)))
+			p->next_stu_info_pt = nullptr;
+		else
+		{
+			printf("READ ERROR!");
+			return - 1;
+		}
+		//sort
+		stu_info_1004_pt max = nullptr, min = nullptr;
+		stu_info_1004_pt temp_pt = start;
+		int score_max_i = 0;
+		//find max score
+		for (int i = 0; i < n; i++)
+		{
+			if(temp_pt->stu_score_i >= score_max_i)
+			{
+				score_max_i = temp_pt->stu_score_i;
+				max = temp_pt;
+				temp_pt = temp_pt->next_stu_info_pt;
+			}
+			else
+			{
+				temp_pt = temp_pt->next_stu_info_pt;
+			}
+		}
+		//find min score
+		temp_pt = start;
+		int score_min_i = 100;
+		for (int i = 0; i < n; i++)
+		{
+			if (temp_pt->stu_score_i <= score_min_i)
+			{
+				score_min_i = temp_pt->stu_score_i;
+				min = temp_pt;
+				temp_pt = temp_pt->next_stu_info_pt;
+			}
+			else
+			{
+				temp_pt = temp_pt->next_stu_info_pt;
+			}
+		}
 
-	for (int i = 0; i < num; i++)
-	{
-		if (data[i][3] < minScore)
-			minScore = i;
-		else;
-	}
 
-	printf("%s %s\n", data[maxStu][1], data[maxStu][2]);
-	printf("%s %s", data[maxStu][1], data[maxStu][2]);
+		//output
+
+		//max
+		printf("%s %s\n", max->stu_name_c, max->stu_number_c);
+		//min
+		printf("%s %s", min->stu_name_c, min->stu_number_c);
+		//free node
+		temp_pt = start;
+		for (int i = 0; i < n; i++)
+		{
+			if(temp_pt->next_stu_info_pt != nullptr)
+			{
+				stu_info_1004_pt next_pt = temp_pt->next_stu_info_pt;
+				free(temp_pt);
+				temp_pt = next_pt;
+			}
+			else if(temp_pt->next_stu_info_pt == nullptr)
+			{
+				free(temp_pt);
+			}
+			else return -1;
+		}
+
+		return 0;
+	}
+	else return -1;
+
+
 }
 
 //1005

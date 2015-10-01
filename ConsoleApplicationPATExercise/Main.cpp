@@ -2,7 +2,6 @@
 //
 
 #include "stdafx.h"
-#include "DataStructure.h"
 #include "pat-basic.h"
 
 
@@ -11,6 +10,7 @@ int main(void)
 {
 
 	test();
+	pat_basic_1004();
 
 
 	system("pause");
