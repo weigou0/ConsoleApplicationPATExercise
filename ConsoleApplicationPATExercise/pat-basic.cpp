@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "DataStructure.h"
+#include <math.h>
 
 
 void test(void) {
@@ -148,6 +149,25 @@ int pat_basic_1004(void)
 输出样例:
 7 6
 */
+//PAT的题目怎么老是和人理解的不一样...Son of biscuit
+int pat_basic_1005(void)
+{
+    int n = 0;
+    int array_i[101];
+    for (int i = 0; i < 101; i++)
+        array_i[i] = 0;
+
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++)
+    {
+        int temp_i = 0;
+        scanf("%d", &temp_i);
+        array_i[temp_i] = 1;
+    }
+
+
+    return 0;
+}
 
 
 //1006
@@ -169,3 +189,63 @@ BBSSS1234
 输出样例2：
 SS123
 */
+int pat_basic_1006(void)
+{
+    int n;
+    scanf("%d", &n);
+    int hundred, ten, one;
+    hundred = (int)n / 100;
+    ten = (int)((n - hundred * 100) / 10);
+    one = (int)(n - hundred * 100 - ten * 10);
+
+
+    for (int i = 1; i <= hundred;i++)
+    {
+        printf("B");
+    }
+    for (int i = 1; i <= ten; i++)
+    {
+        printf("S");
+    }
+    for (int i = 1; i <= one; i++)
+    {
+        printf("%d", i);
+    }
+    return 0;
+}
+int pat_basic_1007(void)
+{
+    long n;
+    scanf("%d", &n);
+    long Prime[10000];
+    int primeNum = 0;
+    int primePair = 0;
+    for (long possiblePrime = 2; possiblePrime <= n; possiblePrime++)
+    {
+        bool isPrime = true;
+        for (long possibleFactor = 2; possibleFactor <= (long)sqrt(possiblePrime); possibleFactor++)
+        {
+            if ((possiblePrime%possibleFactor) == 0)
+            {
+                isPrime = false;
+                break;
+            }
+        }
+        if (isPrime)
+        {
+            Prime[primeNum] = possiblePrime;
+            primeNum++;
+        }
+    }
+    for (int i = 1; i < primeNum; i++)
+    {
+        if ((Prime[i] - Prime[i - 1]) == 2)
+            primePair++;
+    }
+    printf("%d", primePair);
+    return 0;
+}
+int pat_basic_1008(void)
+{
+    return 0;
+}
