@@ -5,3 +5,8 @@ int pat_basic_1005(void);
 int pat_basic_1006(void);
 int pat_basic_1007(void);
 int pat_basic_1008(void);
+int pat_basic_1009(void);
+int pat_basic_1010(void);
+int pat_basic_1011(void);
+int pat_basic_1012(void);
+int pat_basic_1013(void);

@@ -7,3 +7,10 @@ typedef struct stuInfo {
 	unsigned stu_score_i;
 	stuInfo *next_stu_info_pt;
 }stu_info_1004, *stu_info_1004_pt;
+
+//b-1009
+typedef struct words {
+    char word[80];
+    words *next;
+    words *privous;
+};

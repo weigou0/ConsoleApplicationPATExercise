@@ -9,8 +9,8 @@
 int main(void)
 {
 
-	test();
-	pat_basic_1004();
+	//test();
+	pat_basic_1013();
 
 
 	system("pause");

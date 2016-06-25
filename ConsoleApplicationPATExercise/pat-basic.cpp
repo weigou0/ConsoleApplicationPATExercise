@@ -1,7 +1,12 @@
 #include "stdafx.h"
 #include "DataStructure.h"
 #include <math.h>
+#include <vector>
+#include <iostream>
+#include <iomanip>
 
+
+using namespace std;
 
 void test(void) {
 	printf("hello"); 
@@ -168,27 +173,6 @@ int pat_basic_1005(void)
 
     return 0;
 }
-
-
-//1006
-/*
-1006. 换个格式输出整数 (15)
-
-让我们用字母B来表示“百”、字母S表示“十”,用“12...n”来表示个位数字n(<10).换个格式来输出任一个不超过3位的正整数。例如234应该被输出为BBSSS1234,因为它有2个“百”、3个“十”、以及个位的4。
-
-输入格式：每个测试输入包含1个测试用例,给出正整数n(<1000)。
-
-输出格式：每个测试用例的输出占一行，用规定的格式输出n。
-
-输入样例1：
-234
-输出样例1：
-BBSSS1234
-输入样例2：
-23
-输出样例2：
-SS123
-*/
 int pat_basic_1006(void)
 {
     int n;
@@ -247,5 +231,265 @@ int pat_basic_1007(void)
 }
 int pat_basic_1008(void)
 {
+    int numCount = 0;
+    int shiftCount = 0;
+    scanf("%d %d", &numCount, &shiftCount);
+    getchar();
+    int numArray[100];
+    for (int i = 0; i < numCount; i++)
+    {
+        scanf("%d", &numArray[i]);
+    }
+
+    for (int shift = 0; shift < shiftCount; shift++)
+    {
+        int temp = numArray[0];
+        int temp2 = 0;
+        numArray[0] = numArray[numCount - 1];
+        for (int i = 0; i < (numCount - 1); i++)
+        {
+            temp2 = numArray[i + 1];
+            numArray[i + 1] = temp;
+            temp = temp2;
+        }
+    }
+    
+    for (int i = 0; i < numCount-1; i++)
+    {
+        printf("%d ", numArray[i]);
+    }
+    printf("%d", numArray[numCount - 1]);
     return 0;
+}
+int pat_basic_1009(void)
+{
+   // C++ Version!!!
+
+   /* vector<string> vecString;
+    string temp;
+    char c;
+    while (cin.get() != '\n')
+    {
+        cin.unget();
+        cin >> temp;
+        vecString.push_back(temp);
+    }
+
+
+    for (vector<string>::size_type i = vecString.size() - 1; i != 0; i--)
+        cout << vecString[i] << " ";
+    cout << vecString[0];*/
+    return 0;
+}
+int pat_basic_1010(void)
+{
+    //vector<int> coefficient_index;
+    //int temp;
+    //while(cin.get() != '\n')
+    //{
+    //    cin.unget();
+    //    cin >> temp;
+    //    coefficient_index.push_back(temp);
+    //}
+    //for (vector<int>::iterator i = coefficient_index.begin(); i < coefficient_index.end(); )
+    //{
+        //    if((coefficient_index.end()-2) != i)
+        //    {
+        //        if (((*(i + 1)) != 0) && ((*(i + 1)) != 1))
+        //        //if(((*(i + 1)) > 1)|| ((*(i + 1)) < 0))
+        //        {
+        //            cout << (*i) * (*(i + 1));
+        //            cout << ' ';
+        //            cout << (*(i + 1)) - 1;
+        //            cout << ' ';
+        //            i += 2;
+        //        }
+        //        else if ((*(i + 1)) == 1)
+        //        {
+        //            if ((*(i + 3)) == 0)
+        //            {
+        //                if((coefficient_index.end() - 4) <= i)
+        //                {
+        //                    cout << (*i) * (*(i + 1));
+        //                    cout << ' ';
+        //                    cout << (*(i + 1)) - 1;
+        //                    i += 4;
+        //                }
+        //                else
+        //                {
+        //                    cout << (*i) * (*(i + 1));
+        //                    cout << ' ';
+        //                    cout << (*(i + 1)) - 1;
+        //                    cout << ' ';
+        //                    i += 4;
+        //                }
+        //                
+        //            }
+        //        }
+        //        else if ((*(i + 1)) == 0)
+        //        {
+        //            cout << "0 0 ";
+        //            i += 2;
+        //        }
+        //    }
+        //    else
+        //    {
+        //            if ((*(i + 1)) != 0)
+        //            {
+        //                cout << (*i) * (*(i + 1));
+        //                cout << ' ';
+        //                cout << (*(i + 1)) - 1;
+        //                i += 2;
+        //            }
+        //            else if ((*(i + 1)) == 0)
+        //            {
+        //                i += 2;
+        //                cout << "0 0";
+        //            }
+        //               
+        //    }
+        //}
+        
+    int coefficient, index;
+    int count = 0;
+    int zeroFlag = 0;
+    while (cin >> coefficient >> index)
+    {
+        if(index != 0)
+        {
+            if (zeroFlag == 1)
+                cout << ' ';
+            cout << coefficient*index << ' ' << index - 1;
+            count++;
+            zeroFlag = 1;
+        }
+    }
+    if(count == 0)
+    {
+        cout << "0 0";
+    }
+
+    return EXIT_SUCCESS;
+}
+int pat_basic_1011(void)
+{
+    //should have a better method
+    int count = 0;
+    cin >> count;
+    long a, b, c;
+    long long sum;
+    for (int i = 0; i < count; i++)
+    {
+        cin >> a >> b >> c;
+        sum = a + b;
+        if (sum > c)
+        {
+            cout << "Case #" << i + 1 << ": true" << endl;
+        }
+        else
+        {
+            cout << "Case #" << i + 1 << ": false" << endl;
+        }
+    }
+    return EXIT_SUCCESS;
+}
+int pat_basic_1012(void)
+{
+    unsigned count;
+    cin >> count;
+    
+    unsigned processedNumber;
+    int A1 = 0, A2 = 0, A3 = 0, A5 = 0;
+    bool A1Status = false, A2Status = false, A3Status = false, A4Status = false, A5Status = false;
+    float A4 = 0;
+    unsigned A4Count = 0;
+    bool A2Flag = true;
+    while(count != 0)
+    {
+        cin >> processedNumber;
+        //A1
+        if ((processedNumber % 5 == 0) && (processedNumber % 2 == 0))
+        {
+            A1 += processedNumber;
+            A1Status = true;
+        }
+            
+        //A2
+        if(processedNumber % 5 == 1)
+        {
+            if(A2Flag)
+            {
+                A2 += processedNumber;
+                A2Flag = false;
+                A2Status = true;
+            }
+            else
+            {
+                A2 -= processedNumber;
+                A2Flag = true;
+                A2Status = true;
+            }
+        }
+        //A3
+        if (processedNumber % 5 == 2)
+        {
+            A3++;
+            A3Status = true;
+        }
+           
+        //A4 --> Sum
+        if (processedNumber % 5 == 3)
+        {
+            A4 += processedNumber;
+            A4Status = true;
+            A4Count++;
+        }
+        //A5
+        if (processedNumber % 5 == 4)
+        {
+            if (processedNumber > A5)
+            {
+                A5 = processedNumber;
+                A5Status = true;
+            }
+        }
+        count--;
+    }
+    //output
+    if (A1Status)
+        cout << A1 << ' ';
+    else
+        cout << "N ";
+
+    
+    if (A2Status)
+        cout << A2 << ' ';
+    else
+        cout << "N ";
+    
+    if (A3Status)
+        cout << A3 << ' ';
+    else
+        cout << "N ";
+    
+    if (A4Status)
+    {
+        cout << fixed << setprecision(1) << A4/A4Count << ' ';
+        //cout << A4;
+    }
+    else
+        cout << "N ";
+
+   
+    if (A5Status)
+        cout << A5;
+    else
+        cout << "N";
+    return EXIT_SUCCESS;
+}
+int pat_basic_1013(void)
+{
+    int pm, pn;
+    cin >> pm >> pn;
+
 }
