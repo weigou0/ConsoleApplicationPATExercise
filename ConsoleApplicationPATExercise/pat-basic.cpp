@@ -4,7 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <iomanip>
-
+#include <string>
 
 using namespace std;
 
@@ -491,5 +491,52 @@ int pat_basic_1013(void)
 {
     int pm, pn;
     cin >> pm >> pn;
+    unsigned primeCount = 0;
+    int primeCandidate = 2;
+    int lineCount = 0;
+    
+    while (primeCount < pn)
+    {
+        bool primeStatus = true;
+        for (int i = 1; i <= sqrt(primeCandidate)+1; i++) 
+        {
+            if (i != 1 && primeCandidate != i )
+            {
+                if ((primeCandidate % i == 0))
+                {
+                    primeStatus = false;
+                }
+            }
+            
+        }
+        if (primeStatus)
+        {
+            primeCount++;
+            if (primeCount >= pm && primeCount < pn && lineCount < 9)
+            {
+                cout << primeCandidate << ' ';
+                lineCount++;
+            }
+                
+            else if (primeCount >= pm)
+            {
+                cout << primeCandidate << endl;
+                lineCount = 0;
+            }
+            
+        }
+        primeCandidate++;
+        
+    }
+    return EXIT_SUCCESS;
+}
+int pat_basic_1014(void)
+{
+    string a, b, c, d;
+    cin >> a >> b >> c >> d;
+    for (string::size_type i = 0; i < a.length() && i < b.length(); i++ )
+    {
+        
+    }
 
 }

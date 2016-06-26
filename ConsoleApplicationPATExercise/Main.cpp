@@ -10,7 +10,7 @@ int main(void)
 {
 
 	//test();
-	pat_basic_1013();
+	pat_basic_1014();
 
 
 	system("pause");
