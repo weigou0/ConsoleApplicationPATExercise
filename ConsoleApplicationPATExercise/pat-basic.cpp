@@ -5,6 +5,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <cctype>
 
 using namespace std;
 
@@ -438,22 +439,22 @@ int pat_basic_1012(void)
         }
            
         //A4 --> Sum
-        if (processedNumber % 5 == 3)
-        {
-            A4 += processedNumber;
-            A4Status = true;
-            A4Count++;
-        }
-        //A5
-        if (processedNumber % 5 == 4)
-        {
-            if (processedNumber > A5)
-            {
-                A5 = processedNumber;
-                A5Status = true;
-            }
-        }
-        count--;
+if (processedNumber % 5 == 3)
+{
+    A4 += processedNumber;
+    A4Status = true;
+    A4Count++;
+}
+//A5
+if (processedNumber % 5 == 4)
+{
+    if (processedNumber > A5)
+    {
+        A5 = processedNumber;
+        A5Status = true;
+    }
+}
+count--;
     }
     //output
     if (A1Status)
@@ -461,26 +462,26 @@ int pat_basic_1012(void)
     else
         cout << "N ";
 
-    
+
     if (A2Status)
         cout << A2 << ' ';
     else
         cout << "N ";
-    
+
     if (A3Status)
         cout << A3 << ' ';
     else
         cout << "N ";
-    
+
     if (A4Status)
     {
-        cout << fixed << setprecision(1) << A4/A4Count << ' ';
+        cout << fixed << setprecision(1) << A4 / A4Count << ' ';
         //cout << A4;
     }
     else
         cout << "N ";
 
-   
+
     if (A5Status)
         cout << A5;
     else
@@ -489,25 +490,26 @@ int pat_basic_1012(void)
 }
 int pat_basic_1013(void)
 {
+    //one test point overtime
     int pm, pn;
     cin >> pm >> pn;
     unsigned primeCount = 0;
     int primeCandidate = 2;
     int lineCount = 0;
-    
+
     while (primeCount < pn)
     {
         bool primeStatus = true;
-        for (int i = 1; i <= sqrt(primeCandidate)+1; i++) 
+        for (int i = 1; i <= sqrt(primeCandidate) + 1; i++)
         {
-            if (i != 1 && primeCandidate != i )
+            if (i != 1 && primeCandidate != i)
             {
                 if ((primeCandidate % i == 0))
                 {
                     primeStatus = false;
                 }
             }
-            
+
         }
         if (primeStatus)
         {
@@ -517,16 +519,16 @@ int pat_basic_1013(void)
                 cout << primeCandidate << ' ';
                 lineCount++;
             }
-                
+
             else if (primeCount >= pm)
             {
                 cout << primeCandidate << endl;
                 lineCount = 0;
             }
-            
+
         }
         primeCandidate++;
-        
+
     }
     return EXIT_SUCCESS;
 }
@@ -534,9 +536,98 @@ int pat_basic_1014(void)
 {
     string a, b, c, d;
     cin >> a >> b >> c >> d;
-    for (string::size_type i = 0; i < a.length() && i < b.length(); i++ )
+    bool flagDay = false;
+    bool flagHour = false;
+    bool flagMinute = false;
+    //int abCount = 0;
+    int hourPosition = 0;
+    for (string::size_type i = 0; i < a.length() && i < b.length(); i++)
     {
-        
+        if (a[i] == b[i] && isalnum(a[i]))
+        {
+            //abCount++;
+            if (isupper(a[i]) && a[i] <= 'G') //a[i] <= 'G' is very important, there is only seven days in a week.
+            {
+                //day
+                if (!flagDay)
+                {
+                    switch (a[i])
+                    {
+                    case 'A':
+                        cout << "MON ";
+                        break;
+                    case 'B':
+                        cout << "TUE ";
+                        break;
+                    case 'C':
+                        cout << "WED ";
+                        break;
+                    case 'D':
+                        cout << "THU ";
+                        break;
+                    case 'E':
+                        cout << "FRI ";
+                        break;
+                    case 'F':
+                        cout << "SAT ";
+                        break;
+                    case 'G':
+                        cout << "SUN ";
+                        break;
+                    }
+                    flagDay = true;
+                    continue;
+                }
+            }
+
+
+            //find hour
+            if (flagDay && (!flagHour))
+            {
+                if ((isupper(a[i]) || isdigit(a[i])) && a[i] <= 'N') //same to days
+                {
+                    hourPosition = static_cast<int>(i);
+                    flagHour = true;
+                }
+            }
+        }
     }
 
+    //print hour
+    if (isdigit(a[hourPosition]))
+    {
+            cout << '0' << a[hourPosition] << ':';
+    }
+    if (isalpha(a[hourPosition]))
+    {
+        if(isupper(a[hourPosition]))
+        {
+            cout << static_cast<int>(a[hourPosition]) - static_cast<int>('A') + 10 << ':';
+        }
+        else if(islower(a[hourPosition]))
+        {
+            cout << static_cast<int>(a[hourPosition]) - static_cast<int>('a') + 10 << ':';
+        }
+        flagHour = true;
+    }
+    //minute
+    for (string::size_type i = 0; i < c.length() && i < d.length(); i++)
+    {
+        if (isalpha(c[i]) && c[i] == d[i] && (!flagMinute))
+        {
+            if (i < 10)
+                cout << '0' << i;
+            else
+                cout << i;
+            flagMinute = true;
+        }
+    }
+    return  EXIT_SUCCESS;
+}
+int pat_basic_1015(void)
+{
+    int totalStudent, minLine, priorityLine;
+    cin >> totalStudent >> minLine >> priorityLine;
+
+    
 }
