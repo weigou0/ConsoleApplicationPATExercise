@@ -10,152 +10,109 @@
 using namespace std;
 
 void test(void) {
-	printf("hello"); 
-	//return 0;
+    printf("hello");
+    //return 0;
 }
 
 //1004
-/*
-1004. 成绩排名(20)
-
-读入n名学生的姓名、学号、成绩，分别输出成绩最高和成绩最低学生的姓名和学号。
-\输入格式:每个测试输入包含1个测试用例,格式为
-第1行:正整数n
-第2行:第1个学生的姓名 学号 成绩
-第3行:第2个学生的姓名 学号 成绩
-... ... ...
-第n + 1行:第n个学生的姓名 学号 成绩
-其中姓名和学号均为不超过10个字符的字符串，成绩为0到100之间的一个整数，这里保证在一组测试用例中没有两个学生的成绩是相同的。
-输出格式:对每个测试用例输出2行，第1行是成绩最高学生的姓名和学号，第2行是成绩最低学生的姓名和学号，字符串间有1空格。
-
-输入样例:
-3
-Joe Math990112 89
-Mike CS991301 100
-Mary EE990830 95
-输出样例:
-Mike CS991301
-Joe Math990112
-*/
-int pat_basic_1004(void) 
+int pat_basic_1004(void)
 {
-	int n = 0;
+    int n = 0;
 
-	//read
-	if(scanf("%d",&n) == 1)
-	{
-		stu_info_1004_pt start = (stu_info_1004_pt)malloc(sizeof(stu_info_1004));
-		stu_info_1004_pt p = start;
-		//1 <--> (n-1)
-		for (int i = 0; i < n-1; i++)
-		{
-			//if(scanf("%s", p->stu_name_c)||scanf("%s", p->stu_number_c)||scanf("%d",p->stu_score_i));
-			if (scanf("%s %s %d", &(p->stu_name_c), &(p->stu_number_c), &(p->stu_score_i)) == 3);
-			else
-			{
-				printf("READ ERROR!");
-				return -1;
-			}
-			stu_info_1004_pt temp_pt = (stu_info_1004_pt)malloc(sizeof(stu_info_1004));
-			p->next_stu_info_pt = temp_pt;
-			p = temp_pt;
-		}
-		//n
-		if (scanf("%s %s %d", &(p->stu_name_c), &(p->stu_number_c), &(p->stu_score_i)))
-			p->next_stu_info_pt = nullptr;
-		else
-		{
-			printf("READ ERROR!");
-			return - 1;
-		}
-		//sort
-		stu_info_1004_pt max = nullptr, min = nullptr;
-		stu_info_1004_pt temp_pt = start;
-		int score_max_i = 0;
-		//find max score
-		for (int i = 0; i < n; i++)
-		{
-			if(temp_pt->stu_score_i >= score_max_i)
-			{
-				score_max_i = temp_pt->stu_score_i;
-				max = temp_pt;
-				temp_pt = temp_pt->next_stu_info_pt;
-			}
-			else
-			{
-				temp_pt = temp_pt->next_stu_info_pt;
-			}
-		}
-		//find min score
-		temp_pt = start;
-		int score_min_i = 100;
-		for (int i = 0; i < n; i++)
-		{
-			if (temp_pt->stu_score_i <= score_min_i)
-			{
-				score_min_i = temp_pt->stu_score_i;
-				min = temp_pt;
-				temp_pt = temp_pt->next_stu_info_pt;
-			}
-			else
-			{
-				temp_pt = temp_pt->next_stu_info_pt;
-			}
-		}
+    //read
+    if (scanf("%d", &n) == 1)
+    {
+        stu_info_1004_pt start = (stu_info_1004_pt)malloc(sizeof(stu_info_1004));
+        stu_info_1004_pt p = start;
+        //1 <--> (n-1)
+        for (int i = 0; i < n - 1; i++)
+        {
+            //if(scanf("%s", p->stu_name_c)||scanf("%s", p->stu_number_c)||scanf("%d",p->stu_score_i));
+            if (scanf("%s %s %d", &(p->stu_name_c), &(p->stu_number_c), &(p->stu_score_i)) == 3);
+            else
+            {
+                printf("READ ERROR!");
+                return -1;
+            }
+            stu_info_1004_pt temp_pt = (stu_info_1004_pt)malloc(sizeof(stu_info_1004));
+            p->next_stu_info_pt = temp_pt;
+            p = temp_pt;
+        }
+        //n
+        if (scanf("%s %s %d", &(p->stu_name_c), &(p->stu_number_c), &(p->stu_score_i)))
+            p->next_stu_info_pt = nullptr;
+        else
+        {
+            printf("READ ERROR!");
+            return -1;
+        }
+        //sort
+        stu_info_1004_pt max = nullptr, min = nullptr;
+        stu_info_1004_pt temp_pt = start;
+        int score_max_i = 0;
+        //find max score
+        for (int i = 0; i < n; i++)
+        {
+            if (temp_pt->stu_score_i >= score_max_i)
+            {
+                score_max_i = temp_pt->stu_score_i;
+                max = temp_pt;
+                temp_pt = temp_pt->next_stu_info_pt;
+            }
+            else
+            {
+                temp_pt = temp_pt->next_stu_info_pt;
+            }
+        }
+        //find min score
+        temp_pt = start;
+        int score_min_i = 100;
+        for (int i = 0; i < n; i++)
+        {
+            if (temp_pt->stu_score_i <= score_min_i)
+            {
+                score_min_i = temp_pt->stu_score_i;
+                min = temp_pt;
+                temp_pt = temp_pt->next_stu_info_pt;
+            }
+            else
+            {
+                temp_pt = temp_pt->next_stu_info_pt;
+            }
+        }
 
 
-		//output
+        //output
 
-		//max
-		printf("%s %s\n", max->stu_name_c, max->stu_number_c);
-		//min
-		printf("%s %s", min->stu_name_c, min->stu_number_c);
-		//free node
-		temp_pt = start;
-		for (int i = 0; i < n; i++)
-		{
-			if(temp_pt->next_stu_info_pt != nullptr)
-			{
-				stu_info_1004_pt next_pt = temp_pt->next_stu_info_pt;
-				free(temp_pt);
-				temp_pt = next_pt;
-			}
-			else if(temp_pt->next_stu_info_pt == nullptr)
-			{
-				free(temp_pt);
-			}
-			else return -1;
-		}
+        //max
+        printf("%s %s\n", max->stu_name_c, max->stu_number_c);
+        //min
+        printf("%s %s", min->stu_name_c, min->stu_number_c);
+        //free node
+        temp_pt = start;
+        for (int i = 0; i < n; i++)
+        {
+            if (temp_pt->next_stu_info_pt != nullptr)
+            {
+                stu_info_1004_pt next_pt = temp_pt->next_stu_info_pt;
+                free(temp_pt);
+                temp_pt = next_pt;
+            }
+            else if (temp_pt->next_stu_info_pt == nullptr)
+            {
+                free(temp_pt);
+            }
+            else return -1;
+        }
 
-		return 0;
-	}
-	else return -1;
+        return 0;
+    }
+    else return -1;
 
 
 }
 
-//1005
-/*
-1005. 继续(3n+1)猜想 (25)
 
-卡拉兹(Callatz)猜想
-对任何一个自然数n,如果它是偶数,那么把它砍掉一半,如果它是奇数,那么把(3n+1)砍掉一半。这样一直反复砍下去,最后一定在某一步得到n=1。
-
-当我们验证卡拉兹猜想的时候,为了避免重复计算,可以记录下递推过程中遇到的每一个数。例如对n=3进行验证的时候，我们需要计算3、5、8、4、2、1,则当我们对n=5、8、4、2进行验证的时候就可以直接判定卡拉兹猜想的真伪,而不需要重复计算.因为这4个数已经在验证3的时候遇到过了.我们称5、8、4、2是被3“覆盖”的数。我们称一个数列中的某个数n为“关键数”.如果n不能被数列中的其他数字所覆盖。
-
-现在给定一系列待验证的数字,我们只需要验证其中的几个关键数,就可以不必再重复验证余下的数字。你的任务就是找出这些关键数字,并按从大到小的顺序输出它们。
-
-输入格式:每个测试输入包含1个测试用例，第1行给出一个正整数K(<100),第2行给出K个互不相同的待验证的正整数n(1<n<=100)的值，数字间用空格隔开。
-
-输出格式:每个测试用例的输出占一行，按从大到小的顺序输出关键数字。数字间用1个空格隔开，但一行中最后一个数字后没有空格。
-
-输入样例:
-6
-3 5 6 7 8 11
-输出样例:
-7 6
-*/
-//PAT的题目怎么老是和人理解的不一样...Son of biscuit
 int pat_basic_1005(void)
 {
     int n = 0;
@@ -254,8 +211,8 @@ int pat_basic_1008(void)
             temp = temp2;
         }
     }
-    
-    for (int i = 0; i < numCount-1; i++)
+
+    for (int i = 0; i < numCount - 1; i++)
     {
         printf("%d ", numArray[i]);
     }
@@ -264,22 +221,22 @@ int pat_basic_1008(void)
 }
 int pat_basic_1009(void)
 {
-   // C++ Version!!!
+    // C++ Version!!!
 
-   /* vector<string> vecString;
-    string temp;
-    char c;
-    while (cin.get() != '\n')
-    {
-        cin.unget();
-        cin >> temp;
-        vecString.push_back(temp);
-    }
+    /* vector<string> vecString;
+     string temp;
+     char c;
+     while (cin.get() != '\n')
+     {
+         cin.unget();
+         cin >> temp;
+         vecString.push_back(temp);
+     }
 
 
-    for (vector<string>::size_type i = vecString.size() - 1; i != 0; i--)
-        cout << vecString[i] << " ";
-    cout << vecString[0];*/
+     for (vector<string>::size_type i = vecString.size() - 1; i != 0; i--)
+         cout << vecString[i] << " ";
+     cout << vecString[0];*/
     return 0;
 }
 int pat_basic_1010(void)
@@ -350,13 +307,13 @@ int pat_basic_1010(void)
         //               
         //    }
         //}
-        
+
     int coefficient, index;
     int count = 0;
     int zeroFlag = 0;
     while (cin >> coefficient >> index)
     {
-        if(index != 0)
+        if (index != 0)
         {
             if (zeroFlag == 1)
                 cout << ' ';
@@ -365,7 +322,7 @@ int pat_basic_1010(void)
             zeroFlag = 1;
         }
     }
-    if(count == 0)
+    if (count == 0)
     {
         cout << "0 0";
     }
@@ -398,14 +355,14 @@ int pat_basic_1012(void)
 {
     unsigned count;
     cin >> count;
-    
+
     unsigned processedNumber;
     int A1 = 0, A2 = 0, A3 = 0, A5 = 0;
     bool A1Status = false, A2Status = false, A3Status = false, A4Status = false, A5Status = false;
     float A4 = 0;
     unsigned A4Count = 0;
     bool A2Flag = true;
-    while(count != 0)
+    while (count != 0)
     {
         cin >> processedNumber;
         //A1
@@ -414,11 +371,11 @@ int pat_basic_1012(void)
             A1 += processedNumber;
             A1Status = true;
         }
-            
+
         //A2
-        if(processedNumber % 5 == 1)
+        if (processedNumber % 5 == 1)
         {
-            if(A2Flag)
+            if (A2Flag)
             {
                 A2 += processedNumber;
                 A2Flag = false;
@@ -437,24 +394,24 @@ int pat_basic_1012(void)
             A3++;
             A3Status = true;
         }
-           
+
         //A4 --> Sum
-if (processedNumber % 5 == 3)
-{
-    A4 += processedNumber;
-    A4Status = true;
-    A4Count++;
-}
-//A5
-if (processedNumber % 5 == 4)
-{
-    if (processedNumber > A5)
-    {
-        A5 = processedNumber;
-        A5Status = true;
-    }
-}
-count--;
+        if (processedNumber % 5 == 3)
+        {
+            A4 += processedNumber;
+            A4Status = true;
+            A4Count++;
+        }
+        //A5
+        if (processedNumber % 5 == 4)
+        {
+            if (processedNumber > A5)
+            {
+                A5 = processedNumber;
+                A5Status = true;
+            }
+        }
+        count--;
     }
     //output
     if (A1Status)
@@ -541,12 +498,12 @@ int pat_basic_1014(void)
     bool flagMinute = false;
     //int abCount = 0;
     int hourPosition = 0;
-    for (string::size_type i = 0; i < a.length() && i < b.length(); i++)
+    for (string::size_type i = 0; i < a.length() && i < b.length() && (!flagHour); i++)
     {
         if (a[i] == b[i] && isalnum(a[i]))
         {
             //abCount++;
-            if (isupper(a[i]) && a[i] <= 'G') //a[i] <= 'G' is very important, there is only seven days in a week.
+            if (isupper(a[i]) && a[i] <= 'G') //(a[i] <= 'G') is very important, there is only seven days in a week.
             {
                 //day
                 if (!flagDay)
@@ -584,7 +541,7 @@ int pat_basic_1014(void)
             //find hour
             if (flagDay && (!flagHour))
             {
-                if ((isupper(a[i]) || isdigit(a[i])) && a[i] <= 'N') //same to days
+                if ((isupper(a[i]) || isdigit(a[i])) && a[i] <= 'N') //same with days
                 {
                     hourPosition = static_cast<int>(i);
                     flagHour = true;
@@ -596,19 +553,18 @@ int pat_basic_1014(void)
     //print hour
     if (isdigit(a[hourPosition]))
     {
-            cout << '0' << a[hourPosition] << ':';
+        cout << '0' << a[hourPosition] << ':';
     }
     if (isalpha(a[hourPosition]))
     {
-        if(isupper(a[hourPosition]))
+        if (isupper(a[hourPosition]))
         {
             cout << static_cast<int>(a[hourPosition]) - static_cast<int>('A') + 10 << ':';
         }
-        else if(islower(a[hourPosition]))
+        else if (islower(a[hourPosition]))
         {
             cout << static_cast<int>(a[hourPosition]) - static_cast<int>('a') + 10 << ':';
         }
-        flagHour = true;
     }
     //minute
     for (string::size_type i = 0; i < c.length() && i < d.length(); i++)
@@ -624,10 +580,122 @@ int pat_basic_1014(void)
     }
     return  EXIT_SUCCESS;
 }
+
+void sortInsert(vector<int> *dataSet, int ID, int DScore, int CScore)
+{
+    if (dataSet->empty())
+    {
+        dataSet->push_back(ID);
+        dataSet->push_back(DScore);
+        dataSet->push_back(CScore);
+    }
+    else
+    {
+        if ((*(dataSet->begin() + 1) + *(dataSet->begin() + 2)) < (DScore + CScore))
+        {
+            dataSet->insert(dataSet->begin(), CScore);
+            dataSet->insert(dataSet->begin(), DScore);
+            dataSet->insert(dataSet->begin(), ID);
+            //reverse addition
+        }
+        if (((*(dataSet->begin() + 1) + *(dataSet->begin() + 2)) > (DScore + CScore)))
+        {
+            //sortInsert(dataSet + 3, ID, DScore, CScore);
+            //error plus a number to a vector moves the whole vector, not a single element! Need to find something to instead.
+        }
+        if (((*(dataSet->begin() + 1) + *(dataSet->begin() + 2)) == (DScore + CScore)))
+        {
+            if (*(dataSet->begin() + 1) > DScore)
+            {
+                if ( dataSet->size() > 3)
+                {
+                    sortInsert(dataSet + 3, ID, DScore, CScore);//error
+                }
+                else
+                {
+                    dataSet->push_back(ID);
+                    dataSet->push_back(DScore);
+                    dataSet->push_back(CScore);
+                }
+            }
+            if (*(dataSet->begin() + 1) < DScore)
+            {
+                dataSet->insert(dataSet->begin(), CScore);
+                dataSet->insert(dataSet->begin(), DScore);
+                dataSet->insert(dataSet->begin(), ID);
+            }
+            if (*(dataSet->begin() + 1) == DScore)
+            {
+                if (*dataSet->begin() > ID)
+                {
+                    dataSet->insert(dataSet->begin(), CScore);
+                    dataSet->insert(dataSet->begin(), DScore);
+                    dataSet->insert(dataSet->begin(), ID);
+                }
+                if (*dataSet->begin() < ID)
+                {
+                    sortInsert(dataSet + 3, ID, DScore, CScore);//error
+                }
+            }
+        }
+    }
+    
+}
 int pat_basic_1015(void)
 {
     int totalStudent, minLine, priorityLine;
     cin >> totalStudent >> minLine >> priorityLine;
+    int passCount = 0;
+    int currentID, currentDScore, CurrentCScore;
+    vector<int> container1, container2, container3, container4;
+    for (int i = 0; i < totalStudent; i++)
+    {
+        //input and sort
+        cin >> currentID >> currentDScore >> CurrentCScore;
+        if (currentDScore >= minLine && CurrentCScore >= minLine)
+        {
+            passCount++;
+            if (currentDScore >= priorityLine && CurrentCScore >= priorityLine)
+            {
+                //store to container 1#
+                sortInsert(&container1, currentID, currentDScore, CurrentCScore);
+            }
+            else if (currentDScore >= priorityLine && CurrentCScore < priorityLine)
+            {
+                //store to container 2#
+                sortInsert(&container2, currentID, currentDScore, CurrentCScore);
+            }
+            else if (currentDScore < priorityLine && CurrentCScore < priorityLine && CurrentCScore <= currentDScore)
+            {
+                //store to container 3#
+                sortInsert(&container3, currentID, currentDScore, CurrentCScore);
+            }
+            else
+            {
+                //store to container 4#
+                sortInsert(&container4, currentID, currentDScore, CurrentCScore);
+            }
+        }
+    }
+    //output
+    cout << passCount << '\n';
+    for (vector<int>::iterator i = container1.begin(); (i + 3) <= container1.end(); i += 3)
+    {
+        cout << *i << ' ' << *(i + 1) << ' ' << *(i + 2) << '\n';
+    }
+    for (vector<int>::iterator i = container2.begin(); (i + 3) <= container2.end(); i += 3)
+    {
+        cout << *i << ' ' << *(i + 1) << ' ' << *(i + 2) << '\n';
+    }
+    for (vector<int>::iterator i = container3.begin(); (i + 3) <= container3.end(); i += 3)
+    {
+        cout << *i << ' ' << *(i + 1) << ' ' << *(i + 2) << '\n';
+    }
+    for (vector<int>::iterator i = container4.begin(); (i + 3) < container4.end(); i += 3)
+    {
+        cout << *i << ' ' << *(i + 1) << ' ' << *(i + 2) << '\n';
+    }
+    cout << *(container4.end() - 2) << ' ' << *(container4.end() - 1) << ' ' << *container4.end();
 
-    
+    return EXIT_SUCCESS;
 }
